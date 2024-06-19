@@ -15,7 +15,8 @@ void draw(){
   e.display();
   e.moverCos();
   e.detecP(p);
- 
+  e.disparar();
+  //println(millis());
 }
 
 void keyPressed() {
