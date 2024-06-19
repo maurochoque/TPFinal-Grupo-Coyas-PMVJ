@@ -4,6 +4,7 @@ class Player{
   private PVector v;//posible power up
   boolean mU, mD, mL, mR;
   float deltaTime = Time.getDeltaTime(frameRate);
+  SpawnerBalas spawner;
   
   Player(PVector pos){
     this.pos=pos;
@@ -14,11 +15,16 @@ class Player{
     mD = false;
     mL = false;
     mR = false;
+    spawner = new SpawnerBalas();
+
   }
   
   void display(){
     fill(0,200,50);
     square(pos.x+movi.x,pos.y+movi.y,25);
+    
+    spawner.displayDisparos();
+
     //println(pos.x,pos.y);
   }
   
@@ -35,7 +41,15 @@ class Player{
   if (mR) {
     movi.x += v.x*deltaTime;
   }
+   spawner.actualizarDisparos();//SI VA
 }
+   void disparar() {
+    PVector posBala = new PVector(this.pos.x+movi.x,this.pos.y+movi.y);//PVector.add(pos, movi);
+    PVector velBala = new PVector(0, -10);  // vlocidad de la bala
+    spawner.agregarDisparo(posBala, velBala, 5);/*cambiar 5 por una variable*/
+    //spawner.actualizarDisparos();
+    //println(posBala);
+  }
   
   void mActi() {
   if (key == 'w') {
@@ -50,6 +64,7 @@ class Player{
   if (key == 'd') {
     mR = true;
    }
+   //disparar();
   }
 
   void mRelaj() {
@@ -64,6 +79,9 @@ class Player{
     }
     if (key == 'd') {
       mR = false;
+    }
+    if (key == 'k') {
+     disparar();// se llama al metodo al dejar de apretar el boton
     }
   }
   public PVector getPos(){
