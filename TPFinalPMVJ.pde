@@ -20,9 +20,10 @@ void draw(){
   e.moverCos();
   e.detecP(p);
   e.disparar();
+  //e.disparoPower();
   spawnerEnemigos.actualizarSpawner();
   spawnerEnemigos.displayEnemigos();
-  //println(millis());
+  println(millis());
 }
 
 void keyPressed() {
