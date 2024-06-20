@@ -84,11 +84,12 @@ class Enemy{
     
   }
    public void disparar() {
-    if (millis() - tiempoUltimoDisparo >= intervaloDisparo) {
+     float tiempoT=millis();
+    if (tiempoT - tiempoUltimoDisparo >= intervaloDisparo) {
       PVector posicionBala = posicion.copy();
-      PVector velocidadBala = new PVector(0, 3);  // Velocidad de la bala
+      PVector velocidadBala = new PVector(0, 3);  // velocidad de la bala
       spawner.agregarDisparo(posicionBala, velocidadBala, 5);
-      tiempoUltimoDisparo = millis(); // Actualiza el tiempo del último disparo
+      tiempoUltimoDisparo = millis(); // actualiza el tiempo del ltimo disparo
     }
   }
   

@@ -1,9 +1,13 @@
 Player p;
 Enemy e;
+SpawnerEnemigos spawnerEnemigos;
+
 void setup(){
   size(500,500);
   p= new Player(new PVector (width/2,height-25));
   e= new Enemy(new PVector(width/2,30));
+  spawnerEnemigos = new SpawnerEnemigos(int(random(500,1500))); // crea un enemigo cada 1seg
+
 }
 
 void draw(){
@@ -16,6 +20,8 @@ void draw(){
   e.moverCos();
   e.detecP(p);
   e.disparar();
+  spawnerEnemigos.actualizarSpawner();
+  spawnerEnemigos.displayEnemigos();
   //println(millis());
 }
 
