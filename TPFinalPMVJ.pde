@@ -23,11 +23,15 @@ void draw(){
   //e.disparoPower();
   spawnerEnemigos.actualizarSpawner();
   spawnerEnemigos.displayEnemigos();
-  println(millis());
+  //println(millis());
 }
 
 void keyPressed() {
   p.mActi(); 
+  spawnerEnemigos.activarPU();
+     /* if (key == ' ') { // activa el power-up al presionar la barra espaciadora
+        spawnerEnemigos.powerUp.activar();
+      }*/
 }
 
 void keyReleased() {

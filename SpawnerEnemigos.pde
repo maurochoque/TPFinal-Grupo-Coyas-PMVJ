@@ -2,11 +2,13 @@ class SpawnerEnemigos {
   ArrayList<Enemigo> enemigos;
   int intervaloSpawn;
   int tiempoUSpawn;
-
+      PowerUp powerUp;
+  
   SpawnerEnemigos(int intervaloSpawn) {
     enemigos = new ArrayList<Enemigo>();
     this.intervaloSpawn = intervaloSpawn;
     this.tiempoUSpawn = 0;
+        this.powerUp = new PowerUp(3000); // duración de congelación de 3 segundos
   }
 
   void actualizarSpawner() {
@@ -34,11 +36,18 @@ class SpawnerEnemigos {
         enemigos.remove(i);
       }
     }
+        powerUp.actualizar(this); // actualiza el estado del power-up
   }
 
   void displayEnemigos() {
     for (Enemigo enemigo : enemigos) {
       enemigo.display();
     }
+  }
+  
+  void activarPU(){
+    if (key == ' ') { // activa el power-up al presionar la barra espaciadora
+        powerUp.activar();
+      }
   }
 }

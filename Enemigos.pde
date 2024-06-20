@@ -1,6 +1,7 @@
 class Enemigo {
   PVector posicion;
   PVector velocidad;
+      PVector velocidadOriginal; // guarda la velocidad original
   int tamaño;
   ArrayList<Disparo> disparos;
   int intervaloDisparo;
@@ -9,6 +10,7 @@ class Enemigo {
   Enemigo(PVector posicion, PVector velocidad, int tamaño, int intervaloDisparo) {
     this.posicion = posicion.copy();
     this.velocidad = velocidad.copy();
+        this.velocidadOriginal = velocidad.copy(); // inicia con la velocidad original, para guardar su valor
     this.tamaño = tamaño;
     this.intervaloDisparo = intervaloDisparo;
     this.tiempoUDisparo = 0;
@@ -55,4 +57,9 @@ class Enemigo {
   boolean fueraDePantalla() {
     return posicion.y > height;
   }
+  
+          // metodo para restaurar la velocidad original
+      void restaurarVelocidad() {
+        velocidad.set(velocidadOriginal);
+      }
 }

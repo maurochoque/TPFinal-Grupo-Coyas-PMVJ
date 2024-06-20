@@ -18,7 +18,7 @@ class Disparo {
   
   void actualizar() {
     posicion.add(velocidad);
-     // Lógica de rebote si la bala está en modo rebote
+     
    
     
   }

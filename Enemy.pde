@@ -101,11 +101,12 @@ class Enemy{
     if (tiempoT - tiempoUltimoDisparoPower >= intervaloDisparoPower) {
       PVector posicionBalaP = posicion.copy();
       PVector velocidadBalaP = new PVector(random(-1, 1), 3); 
-      PVector muro= new PVector(50,50);
-      cal.reflejar(new PVector(muro.x,muro.y),new PVector (posicionBalaP.x,posicionBalaP.y));
-      
+            
       spawner.agregarDisparo(posicionBalaP, velocidadBalaP, 25); 
       tiempoUltimoDisparoPower = millis(); 
+      
+            
+      
       println("aguaa");
     }
 
