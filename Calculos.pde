@@ -47,5 +47,11 @@ class Calculos{
     float anguloG= degrees(angulo);
     return anguloG;
   }
+  /*REFLEXION*/
+  PVector reflejar(PVector direccion, PVector normal) {
+    normal.normalize();
+    PVector reflejada = PVector.sub(direccion, PVector.mult(normal, 2 * direccion.dot(normal)));
+    return reflejada;
+  }
  
 }

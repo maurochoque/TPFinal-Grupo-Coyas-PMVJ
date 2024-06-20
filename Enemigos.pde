@@ -30,9 +30,9 @@ class Enemigo {
   void disparar() {
     if (millis() - tiempoUDisparo >= intervaloDisparo) {
       PVector posicionBala = posicion.copy();
-      PVector velocidadBala = new PVector(0, 3);  // Velocidad de la bala
+      PVector velocidadBala = new PVector(0, 3);  
       disparos.add(new Disparo(posicionBala, velocidadBala, 5));
-      tiempoUDisparo = millis(); // Actualiza el tiempo del último disparo
+      tiempoUDisparo = millis();
     }
   }
   

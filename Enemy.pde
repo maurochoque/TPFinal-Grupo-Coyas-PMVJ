@@ -7,6 +7,9 @@ class Enemy{
   private float tiempoUltimoDisparo = 0;
   private float intervaloDisparo = 1000; 
   
+  private float tiempoUltimoDisparoPower = 0;
+  private float intervaloDisparoPower = 4000; // dispara cada 10 segundos
+  
   SpawnerBalas spawner;
 
   //float time=Time.getDeltaTime(frameRate);//
@@ -85,12 +88,27 @@ class Enemy{
   }
    public void disparar() {
      float tiempoT=millis();
+     
+     // dspara bala normal cada segundo
     if (tiempoT - tiempoUltimoDisparo >= intervaloDisparo) {
       PVector posicionBala = posicion.copy();
-      PVector velocidadBala = new PVector(0, 3);  // velocidad de la bala
+      PVector velocidadBala = new PVector(0, 3); // velocidad de la bala
       spawner.agregarDisparo(posicionBala, velocidadBala, 5);
-      tiempoUltimoDisparo = millis(); // actualiza el tiempo del ltimo disparo
+      tiempoUltimoDisparo = millis(); // actualiza el tiempo del ultimo disparo
     }
+    
+     // disparar bala grande cada 4 segundos
+    if (tiempoT - tiempoUltimoDisparoPower >= intervaloDisparoPower) {
+      PVector posicionBalaP = posicion.copy();
+      PVector velocidadBalaP = new PVector(random(-1, 1), 3); 
+      PVector muro= new PVector(50,50);
+      cal.reflejar(new PVector(muro.x,muro.y),new PVector (posicionBalaP.x,posicionBalaP.y));
+      
+      spawner.agregarDisparo(posicionBalaP, velocidadBalaP, 25); 
+      tiempoUltimoDisparoPower = millis(); 
+      println("aguaa");
+    }
+
   }
   
     /*public void disparar() {
