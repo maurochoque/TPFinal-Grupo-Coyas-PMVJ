@@ -1,17 +1,17 @@
 class SpawnerEnemigos {
-  ArrayList<Enemigo> enemigos;
-  int intervaloSpawn;
-  int tiempoUSpawn;
-      PowerUp powerUp;
+  private ArrayList<Enemigo> enemigos;
+  private int intervaloSpawn;
+  private int tiempoUSpawn;
+  private PowerUp powerUp;
   
-  SpawnerEnemigos(int intervaloSpawn) {
+  public SpawnerEnemigos(int intervaloSpawn) {
     enemigos = new ArrayList<Enemigo>();
     this.intervaloSpawn = intervaloSpawn;
     this.tiempoUSpawn = 0;
         this.powerUp = new PowerUp(3000); // duración de congelación de 3 segundos
   }
 
-  void actualizarSpawner() {
+  public void actualizarSpawner() {
     if (millis() - tiempoUSpawn >= intervaloSpawn) {
       agregarEnemigo();
       tiempoUSpawn = millis(); //actualiza tiempoUSpawn al valor del ultimo spawn
@@ -19,7 +19,7 @@ class SpawnerEnemigos {
     actualizarEnemigos();
   }
 
-  void agregarEnemigo() {
+  public void agregarEnemigo() {
     float x = random(width);
     PVector posicion = new PVector(x, 0);
     PVector velocidad = new PVector(random(-2,2), 2);  //velocidad de enemigo
@@ -28,7 +28,7 @@ class SpawnerEnemigos {
     enemigos.add(new Enemigo(posicion, velocidad, tamaño, intervaloDisparo));
   }
 
-  void actualizarEnemigos() {
+  public void actualizarEnemigos() {
     for (int i = enemigos.size() - 1; i >= 0; i--) {
       Enemigo enemigo = enemigos.get(i);
       enemigo.actualizar();
@@ -39,13 +39,13 @@ class SpawnerEnemigos {
         powerUp.actualizar(this); // actualiza el estado del power-up
   }
 
-  void displayEnemigos() {
+  public void displayEnemigos() {
     for (Enemigo enemigo : enemigos) {
       enemigo.display();
     }
   }
   
-  void activarPU(){
+  public void activarPU(){
     if (key == ' ') { // activa el power-up al presionar la barra espaciadora
         powerUp.activar();
       }

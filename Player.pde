@@ -2,11 +2,11 @@ class Player{
   private PVector posicion;
   private PVector movimiento;
   private PVector v;//posible power up
-  boolean mU, mD, mL, mR;
-  float deltaTime = Time.getDeltaTime(frameRate);
-  SpawnerBalas spawner;
+  private boolean mU, mD, mL, mR;
+  private float deltaTime = Time.getDeltaTime(frameRate);
+  private SpawnerBalas spawner;
   
-  Player(PVector pos){
+  public Player(PVector pos){
     this.posicion=pos;
     //pos = new PVector(width/2,height-25);
     movimiento = new PVector(0,0);
@@ -19,7 +19,7 @@ class Player{
 
   }
   
-  void display(){
+  public void display(){
     fill(0,200,50);
     square(posicion.x+movimiento.x,posicion.y+movimiento.y,25);
     
@@ -28,32 +28,32 @@ class Player{
     //println(pos.x,pos.y);
   }
   
-  void move() {
+  public void move() {
   if (mU) {
     movimiento.y -= v.y*deltaTime;
-  }
-  if (mD) {
-    movimiento.y += v.y*deltaTime;
-  }
-  if (mL) {
-    movimiento.x -= v.x*deltaTime;
-  }
-  if (mR) {
-    movimiento.x += v.x*deltaTime;
-  }
-   spawner.actualizarDisparos();//SI VA
-   display();//posible para limpiar clase principal
+    }
+    if (mD) {
+      movimiento.y += v.y*deltaTime;
+    }
+    if (mL) {
+      movimiento.x -= v.x*deltaTime;
+    }
+    if (mR) {
+      movimiento.x += v.x*deltaTime;
+    }
+     spawner.actualizarDisparos();//SI VA
+   //display();//posible para limpiar clase principal
    
-}
-   void disparar() {
-    PVector posBala = new PVector(this.posicion.x+movimiento.x,this.posicion.y+movimiento.y);//PVector.add(pos, movi);
+  }
+   public void disparar() {
+    PVector posBala = PVector.add(posicion, movimiento);//new PVector(this.posicion.x+movimiento.x,this.posicion.y+movimiento.y);
     PVector velBala = new PVector(0, -10);  // vlocidad de la bala
     spawner.agregarDisparo(posBala, velBala, 5);/*cambiar 5 por una variable*/
     //spawner.actualizarDisparos();
     //println(posBala);
   }
   
-  void mActi() {
+  public void mActi() {
   if (key == 'w') {
     mU = true;
   }
@@ -69,7 +69,7 @@ class Player{
    //disparar();
   }
 
-  void mRelaj() {
+  public void mRelaj() {
     if (key == 'w') {
       mU = false;
     }

@@ -2,7 +2,7 @@ class Enemy{
   private PVector posicion;
   private PImage imagen;
   private int power=1;
-  Calculos cal;
+  private Calculos cal;
   
   private float tiempoUltimoDisparo = 0;
   private float intervaloDisparo = 1000; 
@@ -10,7 +10,7 @@ class Enemy{
   private float tiempoUltimoDisparoPower = 0;
   private float intervaloDisparoPower = 4000; // dispara cada 10 segundos
   
-  SpawnerBalas spawner;
+  private SpawnerBalas spawner;
 
   //float time=Time.getDeltaTime(frameRate);//
   public Enemy(PVector posicion){
@@ -40,16 +40,17 @@ class Enemy{
     float angulo=cal.calcularAngulo(pV,dist);
     //println(angulo);
     
-   if(dist.x>5 && dist.y<230){
-     power=5;
+   if(dist.y <= 230){ //(dist.x>5 && dist.y<230){
+     power=5;//player al acercarse aumenta movimiento de enemy
      stroke(255,11,0);
      line(this.posicion.x,this.posicion.y,player.getPos().x,player.getPos().y);
-    
+    println(dist);
     }
     else{
       power=1;
       stroke(0);
     }
+    /*******COMBINAR CON LA BALA POWERUP***********/
     if(angulo > 110 || angulo < 70){
       line(this.posicion.x,this.posicion.y,player.getPos().x,player.getPos().y);
     }
@@ -100,18 +101,16 @@ class Enemy{
      // disparar bala grande cada 4 segundos
     if (tiempoT - tiempoUltimoDisparoPower >= intervaloDisparoPower) {
       PVector posicionBalaP = posicion.copy();
-      PVector velocidadBalaP = new PVector(random(-1, 1), 3); 
-            
-      spawner.agregarDisparo(posicionBalaP, velocidadBalaP, 25); 
+      PVector velocidadBalaP = new PVector(random(-5, 5), random(0,3));//"direccion" hacia donde saldra la bala grande
+      Disparo disparo = new Disparo(posicionBalaP, velocidadBalaP, 25);
+      disparo.reflectante = true;
+      disparo.tiempoReflexion = millis();
+      spawner.agregarDisparo(disparo);
+      //spawner.agregarDisparo(posicionBalaP, velocidadBalaP, 25); 
       tiempoUltimoDisparoPower = millis(); 
-      
-            
-      
-      println("aguaa");
+      //println("se crea");
     }
-
   }
-  
     /*public void disparar() {
     PVector posicionBala = posicion.copy();//copy() es una copia de posicion original, si se cambia posicion en algun momento esta posicion con copy(), no se ve afectada
     PVector velocidadBala = new PVector(0, 3);  // Velocidad de la bala
