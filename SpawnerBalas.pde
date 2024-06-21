@@ -1,16 +1,21 @@
 class SpawnerBalas {
-  ArrayList<Disparo> disparos;
+  private ArrayList<Disparo> disparos;
   
-  SpawnerBalas() {
+  public SpawnerBalas() {
     disparos = new ArrayList<Disparo>();
   }
   
-  void agregarDisparo(PVector posicion, PVector velocidad, float tamano) {
+  
+  public void agregarDisparo(Disparo disparo) {//MISMO METODO RECIBE DIFERENTES PARAMETROS
+     disparos.add(disparo);
+    }
+          
+  public void agregarDisparo(PVector posicion, PVector velocidad, float tamano) {
     
     disparos.add(new Disparo(posicion, velocidad, tamano));
   }
   
-  void actualizarDisparos() {
+  public void actualizarDisparos() {
     for (int i = disparos.size()-1; i >= 0; i--) {
       Disparo disparo = disparos.get(i);//disparos[i];
       disparo.actualizar();
@@ -20,7 +25,7 @@ class SpawnerBalas {
     }
   }
   
-  void displayDisparos() {
+  public void displayDisparos() {
     for (Disparo disparo : disparos) {
       disparo.display();
     }

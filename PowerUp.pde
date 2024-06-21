@@ -1,24 +1,24 @@
 class PowerUp {
-  int duracionCongelacion; // congelacion en milisegundos
-  int tiempoInicio;        // tiempo en el cual incio la congelación
-  boolean activo;          // bandera del powerup
+  private int duracionCongelacion; // congelacion en milisegundos
+  private int tiempoInicio;        // tiempo en el cual incio la congelación
+  private boolean activo;          // bandera del powerup
 
-  PowerUp(int duracionCongelacion) {
+  public PowerUp(int duracionCongelacion) {
     this.duracionCongelacion = duracionCongelacion;
     this.activo = false;
   }
 
-  void activar() {
+  private void activar() {
     this.activo = true;
     this.tiempoInicio = millis();
   }
 
-  void desactivar(ArrayList<Enemigo> enemigos) {
+  private void desactivar(ArrayList<Enemigo> enemigos) {
     this.activo = false;
         restaurarEnemigos(enemigos); //restaura la velocidad de los enemigos
   }
 
-  void actualizar(SpawnerEnemigos spawnerEnemigos) {
+  private void actualizar(SpawnerEnemigos spawnerEnemigos) {
     if (activo) {
       if (millis() - tiempoInicio >= duracionCongelacion) {//esto es falso hasta que se presione una vez " "
         desactivar(spawnerEnemigos.enemigos);
@@ -28,12 +28,12 @@ class PowerUp {
     }
   }
 
-  void congelarEnemigos(ArrayList<Enemigo> enemigos) {
+  private void congelarEnemigos(ArrayList<Enemigo> enemigos) {
     for (Enemigo enemigo : enemigos) {
       enemigo.velocidad.set(0, 0);//esto convierte la velocidad(movimiento en 0) NO LA POSICION DE CADA ENEMIGO
     }
   }
-  void restaurarEnemigos(ArrayList<Enemigo> enemigos) {
+  private void restaurarEnemigos(ArrayList<Enemigo> enemigos) {
     for (Enemigo enemigo : enemigos) {
       enemigo.restaurarVelocidad();
     }
