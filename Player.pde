@@ -6,7 +6,8 @@ class Player{
   private float deltaTime = Time.getDeltaTime(frameRate);
   private SpawnerBalas spawner;
   
-  public Player(PVector pos){
+  private PowerUp powerUp;
+  public Player(PVector pos){//, PowerUp powerUp){
     this.posicion=pos;
     //pos = new PVector(width/2,height-25);
     movimiento = new PVector(0,0);
@@ -16,7 +17,7 @@ class Player{
     mL = false;
     mR = false;
     spawner = new SpawnerBalas();
-
+    powerUp = new PowerUp(3000); // duración de congelación de 3 segundos
   }
   
   public void display(){
@@ -24,7 +25,7 @@ class Player{
     square(posicion.x+movimiento.x,posicion.y+movimiento.y,25);
     
     spawner.displayDisparos();
-
+    powerUp.displayEscudo(getPos());
     //println(pos.x,pos.y);
   }
   
@@ -42,6 +43,7 @@ class Player{
       movimiento.x += v.x*deltaTime;
     }
      spawner.actualizarDisparos();//SI VA
+     powerUp.actualizar2();
    //display();//posible para limpiar clase principal
    
   }
@@ -65,6 +67,10 @@ class Player{
   }
   if (key == 'd') {
     mR = true;
+   }
+   
+   if (key == 'p') {
+      powerUp.activarEscudo();
    }
    //disparar();
   }

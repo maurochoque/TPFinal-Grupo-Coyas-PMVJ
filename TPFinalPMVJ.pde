@@ -1,13 +1,14 @@
 Player p;
 Enemy e;
 SpawnerEnemigos spawnerEnemigos;
-
+//PowerUp powerUp;
 void setup(){
   size(500,500);
-  p= new Player(new PVector (width/2,height-25));
+    //powerUp = new PowerUp(3000); 
+  p= new Player(new PVector (width/2,height-25)); //powerUp);
   e= new Enemy(new PVector(width/2,30));
   spawnerEnemigos = new SpawnerEnemigos(int(random(500,1500))); // crea un enemigo cada 1seg
-  /********SE CORRIGIO PROBLEMA DE REFLEXION*********/
+  
 }
 
 void draw(){
@@ -24,7 +25,7 @@ void draw(){
   spawnerEnemigos.actualizarSpawner();
   spawnerEnemigos.displayEnemigos();
   //println(millis());
-  println(frameRate);
+  //println(frameRate);
 }
 
 void keyPressed() {
