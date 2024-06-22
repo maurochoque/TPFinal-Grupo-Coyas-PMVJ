@@ -32,7 +32,7 @@ class Enemy{
     
   }
   public void detecP(Player player){
-    PVector pV = new PVector(this.posicion.x,1).normalize();
+    PVector pV = new PVector(this.posicion.x,0).normalize();
     
     //line(this.posicion.x,this.posicion.y,player.getPos().x,player.getPos().y);
     PVector dist= cal.distancia(this.posicion,player.getPos());
@@ -44,7 +44,7 @@ class Enemy{
      power=5;//player al acercarse aumenta movimiento de enemy
      stroke(255,11,0);
      line(this.posicion.x,this.posicion.y,player.getPos().x,player.getPos().y);
-    println(dist);
+    //println(dist);
     }
     else{
       power=1;
@@ -88,11 +88,11 @@ class Enemy{
     
   }
    public void disparar() {
-     float tiempoT=millis();
+     float tiempoT=millis();/*CREAR ESTA VARIABLE EN INTERFAZ*/
      
      // dspara bala normal cada segundo
-    if (tiempoT - tiempoUltimoDisparo >= intervaloDisparo) {
-      PVector posicionBala = posicion.copy();
+    if (tiempoT - tiempoUltimoDisparo >= intervaloDisparo) {//EN PRINCIPIO NO SE CUMPLE PERO tiempoT aumenta segun el tiempo 1000=1segundo
+      PVector posicionBala = posicion.copy();//this.posicion;
       PVector velocidadBala = new PVector(0, 3); // velocidad de la bala
       spawner.agregarDisparo(posicionBala, velocidadBala, 5);
       tiempoUltimoDisparo = millis(); // actualiza el tiempo del ultimo disparo

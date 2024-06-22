@@ -4,4 +4,4 @@ static class Time{
     float deltaTime = 1.0/fps;
     return deltaTime;
   }
-}
+}  

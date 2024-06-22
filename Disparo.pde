@@ -61,7 +61,7 @@ class Disparo {
   }
   
   public boolean fueraDePantalla() {
-    return (posicion.x < 0||posicion.x > width|| posicion.y < 0 || posicion.y > height);
+    return (posicion.x < 0||posicion.x > width|| posicion.y < 0 || posicion.y > height); 
   }
   
   

@@ -45,11 +45,13 @@ class Calculos{
   }
   /*Calculo angulo/producto punto */
   public float calcularAngulo(PVector v1, PVector v2) {
-    float dot = v1.dot(v2);
-    float mag1 = v1.mag();
+    float dot = v1.dot(v2);//devuelve un numero, es la + de la * entre los elementos de cada vector (x,y,z)
+    float mag1 = v1.mag();//la magnitud de un vector = aplicando pitagoras a sus elementos
     float mag2 = v2.mag();
-    float angulo= acos(dot / (mag1 * mag2));
-    float anguloG= degrees(angulo);
+    /*  angulo = arcose (producto entre vectores / multiplicacion de modulos de vectores)*/
+    float angulo= acos(dot / (mag1 * mag2));//formula para sacar el angulo
+    /*****/
+    float anguloG= degrees(angulo);//pasa el valor a grados
     return anguloG;
   }
   /*REFLEXION*/
@@ -58,5 +60,18 @@ class Calculos{
     PVector reflejada = PVector.sub(direccion, PVector.mult(normal, 2 * direccion.dot(normal)));
     return reflejada;
   }
+  
+   public PVector productoVectorial(PVector v1, PVector v2) {
+    float cx = v1.y * v2.z - v1.z * v2.y;
+    float cy = v1.z * v2.x - v1.x * v2.z;
+    float cz = v1.x * v2.y - v1.y * v2.x;
+  //float area = v1.x * v2.y - v1.y * v2.x;
+  
+  /******OTRA FORMULA calcula directo el area****/
+    float area= v1.x*v2.y - v1.y*v2.x;
+    //println(cx, cy, cz, area);
+    return new PVector(cx, cy, cz);
+  }
+  
  
 }

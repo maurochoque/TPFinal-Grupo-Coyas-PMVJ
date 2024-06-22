@@ -8,7 +8,7 @@ class SpawnerEnemigos {
     enemigos = new ArrayList<Enemigo>();
     this.intervaloSpawn = intervaloSpawn;
     this.tiempoUSpawn = 0;
-        this.powerUp = new PowerUp(3000); // duración de congelación de 3 segundos
+        this.powerUp = new PowerUp(3000); 
   }
 
   public void actualizarSpawner() {
@@ -32,7 +32,7 @@ class SpawnerEnemigos {
     for (int i = enemigos.size() - 1; i >= 0; i--) {
       Enemigo enemigo = enemigos.get(i);
       enemigo.actualizar();
-      if (enemigo.fueraDePantalla()) {
+      if (enemigo.fueraDePantalla() || enemigo.fueraDePantallaW()) {//se agrego para eliminar enemigos cuando salen del width 
         enemigos.remove(i);
       }
     }

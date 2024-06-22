@@ -10,7 +10,7 @@ class Enemigo {
   public Enemigo(PVector posicion, PVector velocidad, int tamaño, int intervaloDisparo) {
     this.posicion = posicion.copy();
     this.velocidad = velocidad.copy();
-        this.velocidadOriginal = velocidad.copy(); // inicia con la velocidad original, para guardar su valor
+    this.velocidadOriginal = velocidad.copy(); // inicia con la velocidad original, para guardar su valor
     this.tamaño = tamaño;
     this.intervaloDisparo = intervaloDisparo;
     this.tiempoUDisparo = 0;
@@ -57,8 +57,11 @@ class Enemigo {
   public boolean fueraDePantalla() {
     return posicion.y > height;
   }
+  public boolean fueraDePantallaW() {
+    return posicion.y > width;
+  }
   
-          // metodo para restaurar la velocidad original
+       // metodo para restaurar la velocidad original
    public void restaurarVelocidad() {
       velocidad.set(velocidadOriginal);
     }
