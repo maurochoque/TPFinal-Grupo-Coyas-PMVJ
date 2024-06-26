@@ -3,12 +3,16 @@ class SpawnerEnemigos {
   private int intervaloSpawn;
   private int tiempoUSpawn;
   private PowerUp powerUp;
-  
+  private SpawnerBalas spawnerBalas;
+  //SpawnerBalas f;
+  private float time=Time.getDeltaTime(frameRate);
   public SpawnerEnemigos(int intervaloSpawn) {
     enemigos = new ArrayList<Enemigo>();
     this.intervaloSpawn = intervaloSpawn;
     this.tiempoUSpawn = 0;
-        this.powerUp = new PowerUp(3000); 
+        this.powerUp = new PowerUp(3000);
+        this.spawnerBalas = new SpawnerBalas(); // crea una instancia compartida de SpawnerBalas
+        //this.f= this.getSpawner();
   }
 
   public void actualizarSpawner() {
@@ -17,15 +21,18 @@ class SpawnerEnemigos {
       tiempoUSpawn = millis(); //actualiza tiempoUSpawn al valor del ultimo spawn
     }
     actualizarEnemigos();
+    spawnerBalas.actualizarDisparos(); // actualiza los disparos aquí
   }
 
   public void agregarEnemigo() {
+    
     float x = random(width);
     PVector posicion = new PVector(x, 0);
-    PVector velocidad = new PVector(random(-2,2), 2);  //velocidad de enemigo
+    PVector velocidad = new PVector(random(-80,80)*time, random(80,130)*time);  //velocidad de enemigo
     int tamaño = 25;
     int intervaloDisparo = 2000;  //tiempo entre cada disparo
-    enemigos.add(new Enemigo(posicion, velocidad, tamaño, intervaloDisparo));
+    enemigos.add(new Enemigo(posicion, velocidad, tamaño, intervaloDisparo, spawnerBalas)); // pasa el SpawnerBalas compartido
+    //enemigos.add(new Enemigo(posicion, velocidad, tamaño, intervaloDisparo));
   }
 
   public void actualizarEnemigos() {
@@ -43,11 +50,15 @@ class SpawnerEnemigos {
     for (Enemigo enemigo : enemigos) {
       enemigo.display();
     }
+    spawnerBalas.displayDisparos(); // muestra los disparos aquí
   }
   
   public void activarPU(){
     if (key == ' ') { // activa el power-up al presionar la barra espaciadora
         powerUp.activar();
       }
+  }
+  public SpawnerBalas getSpawner(){
+    return spawnerBalas;
   }
 }
