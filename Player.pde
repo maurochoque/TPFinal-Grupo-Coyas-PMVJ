@@ -7,6 +7,10 @@ class Player{
   private SpawnerBalas spawner;
   
   private PowerUp powerUp;
+  Calculos calculos;
+  //Enemy e;
+  
+  PImage img;
   public Player(PVector pos){//, PowerUp powerUp){
     this.posicion=pos;
     //pos = new PVector(width/2,height-25);
@@ -17,8 +21,24 @@ class Player{
     mL = false;
     mR = false;
     spawner = new SpawnerBalas();
-    powerUp = new PowerUp(3000); // duración de congelación de 3 segundos
+    powerUp = new PowerUp(3000); // duracion de congelacion de 3 segundos
+    img=loadImage("Img/disparoPlayer.png");
+    calculos=new Calculos();
+    
+    //SpawnerBalas balasEnemigos=e.getSpawner();
   }
+  
+    public void update(ArrayList<Disparo> balasEnemigos) {
+      
+        if (calculos.cPyD(this, balasEnemigos)) {
+           
+            println("¡Colisión detectada con una bala enemiga!");
+        }
+        else{
+          //println("NONO");
+        }
+
+    }
   
   public void display(){
     fill(0,200,50);
@@ -27,6 +47,7 @@ class Player{
     spawner.displayDisparos();
     powerUp.displayEscudo(getPos());
     //println(pos.x,pos.y);
+    
   }
   
   public void move() {
@@ -48,11 +69,15 @@ class Player{
    
   }
    public void disparar() {
-    PVector posBala = PVector.add(posicion, movimiento);//new PVector(this.posicion.x+movimiento.x,this.posicion.y+movimiento.y);
+    PVector posBala = new PVector(this.posicion.x+movimiento.x,this.posicion.y+movimiento.y-25);//PVector.add(posicion, movimiento);
     PVector velBala = new PVector(0, -10);  // vlocidad de la bala
-    spawner.agregarDisparo(posBala, velBala, 5);/*cambiar 5 por una variable*/
+   // Disparo disparo= new Disparo(posBala, velBala, 5,f);
+   // spawner.agregarDisparo(disparo);
+     
+    spawner.agregarDisparo(posBala, velBala, 25,img);/*cambiar 5 por una variable*/
     //spawner.actualizarDisparos();
     //println(posBala);
+    
   }
   
   public void mActi() {
@@ -92,6 +117,8 @@ class Player{
      disparar();// se llama al metodo al dejar de apretar el boton
     }
   }
+  
+    
   public PVector getPos(){
     return PVector.add(posicion, movimiento);
   }

@@ -73,5 +73,30 @@ class Calculos{
     return new PVector(cx, cy, cz);
   }
   
+ public boolean cPyD(Player player, ArrayList<Disparo> balasEnemigos) {
+        PVector posPlayer = player.getPos(); 
+        
+        boolean colision = false;
+
+        for (Disparo bala : balasEnemigos) {
+            PVector posBala = bala.getPosicion().copy();//posicion actual del disparo
+
+            float distancia = posPlayer.dist(posBala); // calcula distancia entre juygador y el disparo
+          //println(bala.getPosicion(),posPlayer,distancia);
+          println(distancia);
+            if (distancia < 25) { 
+                colision = true;
+                bala.posicion.y=-100;//elimina la bala al ponerla fuera del size por el metodo de Disparo.fueradePantalla
+                //println(posBala.y);
+                //println("150550"); 
+              }
+                else{
+                  //println("SSSS");
+                }
+                //break; // para salir del bucle
+        }
+        return colision;
+    }
+  
  
 }

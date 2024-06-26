@@ -11,14 +11,18 @@ class Enemy{
   private float intervaloDisparoPower = 4000; // dispara cada 10 segundos
   
   private SpawnerBalas spawner;
-
+  
+  PImage img;
+  
+  PImage imgPW;
   //float time=Time.getDeltaTime(frameRate);//
   public Enemy(PVector posicion){
     this.posicion = posicion;
     //this.imagen = loadImage("yoshi_sprite.png");
     cal=new Calculos();
     spawner = new SpawnerBalas();
-
+    img= loadImage("Img/disparoEnemy.png");
+    imgPW = loadImage("Img/disparoEnemyPW.png");
   }
   
   public void display(){
@@ -31,6 +35,15 @@ class Enemy{
     //image(sprite,this.posicion.x,this.posicion.y);
     
   }
+    public void actualizarDisparos() {
+        spawner.actualizarDisparos();
+    }
+
+    public ArrayList<Disparo> getDisparos() {
+        return spawner.getDisparos();
+    }
+  
+  
   public void detecP(Player player){
     PVector pV = new PVector(this.posicion.x,0).normalize();
     
@@ -94,7 +107,7 @@ class Enemy{
     if (tiempoT - tiempoUltimoDisparo >= intervaloDisparo) {//EN PRINCIPIO NO SE CUMPLE PERO tiempoT aumenta segun el tiempo 1000=1segundo
       PVector posicionBala = posicion.copy();//this.posicion;
       PVector velocidadBala = new PVector(0, 3); // velocidad de la bala
-      spawner.agregarDisparo(posicionBala, velocidadBala, 5);
+      spawner.agregarDisparo(posicionBala, velocidadBala, 25,img);
       tiempoUltimoDisparo = millis(); // actualiza el tiempo del ultimo disparo
     }
     
@@ -102,7 +115,7 @@ class Enemy{
     if (tiempoT - tiempoUltimoDisparoPower >= intervaloDisparoPower) {
       PVector posicionBalaP = posicion.copy();
       PVector velocidadBalaP = new PVector(random(-5, 5), random(0,3));//"direccion" hacia donde saldra la bala grande
-      Disparo disparo = new Disparo(posicionBalaP, velocidadBalaP, 25);
+      Disparo disparo = new Disparo(posicionBalaP, velocidadBalaP, 30,imgPW);
       disparo.reflectante = true;
       disparo.tiempoReflexion = millis();
       spawner.agregarDisparo(disparo);
@@ -119,5 +132,9 @@ class Enemy{
   
   public PVector getPosicion(){
     return this.posicion;
+  }
+  
+  public SpawnerBalas getSpawner(){
+    return spawner;
   }
 }
