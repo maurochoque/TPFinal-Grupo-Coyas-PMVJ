@@ -22,13 +22,15 @@ void draw(){
   e.display();
   e.moverCos();
   e.detecP(p);
-  e.disparar();
+  //e.disparar();
   //e.disparoPower();
   spawnerEnemigos.actualizarSpawner();
   spawnerEnemigos.displayEnemigos();
   //println(millis());
   //println(frameRate);
-  p.update(e.getDisparos());
+  p.colision(e.getDisparos());
+  p.colision(spawnerEnemigos.getSpawner().getDisparos());
+  p.colision2(spawnerEnemigos.enemigos);
   //p.update(spawnerEnemigos.actualizarSpawner());
 }
 

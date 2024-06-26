@@ -28,17 +28,6 @@ class Player{
     //SpawnerBalas balasEnemigos=e.getSpawner();
   }
   
-    public void update(ArrayList<Disparo> balasEnemigos) {
-      
-        if (calculos.cPyD(this, balasEnemigos)) {
-           
-            println("¡Colisión detectada con una bala enemiga!");
-        }
-        else{
-          //println("NONO");
-        }
-
-    }
   
   public void display(){
     fill(0,200,50);
@@ -117,6 +106,29 @@ class Player{
      disparar();// se llama al metodo al dejar de apretar el boton
     }
   }
+  
+   public void colision(ArrayList<Disparo> balasEnemigos) {
+      
+        if (calculos.cPyD(this, balasEnemigos)) {
+           
+            println("colision");
+        }
+        else{
+          //println("NONO");
+        }
+
+    }
+      public void colision2(ArrayList<Enemigo> enemigos) {
+      
+        if (calculos.cPyE(this, enemigos)) {
+           
+            println("colision");
+        }
+        else{
+          //println("NONO");
+        }
+
+    }
   
     
   public PVector getPos(){

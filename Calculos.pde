@@ -97,6 +97,32 @@ class Calculos{
         }
         return colision;
     }
+    
+    public boolean cPyE(Player player, ArrayList<Enemigo> enemigos) {
+        PVector posPlayer = player.getPos(); 
+        
+        boolean colision = false;
+
+        for (Enemigo enemigo : enemigos) {
+            PVector posEnemigo = enemigo.getPosicion().copy();//posicion actual del disparo
+
+            float distancia = posPlayer.dist(posEnemigo); // calcula distancia entre juygador y el disparo
+          //println(bala.getPosicion(),posPlayer,distancia);
+          //println(distancia);
+            if (distancia < 25) { 
+                colision = true;
+                enemigo.posicion.y=-100;
+                //bala.posicion.y=-100;//elimina la bala al ponerla fuera del size por el metodo de Disparo.fueradePantalla
+                //println(posBala.y);
+                //println("150550"); 
+              }
+                else{
+                  //println("SSSS");
+                }
+                //break; // para salir del bucle
+        }
+        return colision;
+    }
   
  
 }
