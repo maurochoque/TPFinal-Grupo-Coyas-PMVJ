@@ -14,6 +14,10 @@ class SpawnerBalas {
     
     disparos.add(new Disparo(posicion, velocidad, tamano));
   }
+  public void agregarDisparo(PVector posicion, PVector velocidad, float tamano,PImage img) {
+    
+    disparos.add(new Disparo(posicion, velocidad, tamano,img));
+  }
   
   public void actualizarDisparos() {
     for (int i = disparos.size()-1; i >= 0; i--) {
@@ -30,4 +34,8 @@ class SpawnerBalas {
       disparo.display();
     }
   }
+  
+   public ArrayList<Disparo> getDisparos() {
+        return disparos;
+    }
 }

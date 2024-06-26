@@ -7,7 +7,8 @@ class Disparo {
   private float tiempoReflexion;
 
   private Calculos calculo;/**/
-  
+  PImage img;
+  //PImage f;
   public Disparo(PVector posicion, PVector velocidad, float tamaño) {
     this.posicion = posicion.copy();//posicion; //si posicion tiene algun cambio afecta, con copy() se tiene una copia de los valores originales(sin posibles cambios)
     this.velocidad =velocidad.copy();//velocidad;//
@@ -16,10 +17,21 @@ class Disparo {
     this.reflectante = false;
     this.tiempoReflexion = 0;
     calculo= new Calculos();
-
+      //f=loadImage("Img/disparoPlayer.jpeg");
     
   }
   
+   public Disparo(PVector posicion, PVector velocidad, float tamaño, PImage img) {
+    this.posicion = posicion.copy();//posicion; //si posicion tiene algun cambio afecta, con copy() se tiene una copia de los valores originales(sin posibles cambios)
+    this.velocidad =velocidad.copy();//velocidad;//
+    this.tamaño = tamaño;
+    
+    this.reflectante = false;
+    this.tiempoReflexion = 0;
+    calculo= new Calculos();
+      //f=loadImage("Img/disparoPlayer.jpeg");
+    this.img=img;
+  }
 
   
   public void actualizar() {
@@ -35,7 +47,7 @@ class Disparo {
   }
   
    public void verificarBordes() {
-        if (posicion.x <= 25 || posicion.x >= width-25) {
+        if (posicion.x <= 5 || posicion.x >= width-25) {
           PVector normal = new PVector(1, 0);
           velocidad = calculo.reflejar(velocidad, normal);//velocidad = reflejar(velocidad, normal);
       }
@@ -56,13 +68,25 @@ class Disparo {
          }*/
   
   public void display() {
-    fill(255);
-    ellipse(posicion.x, posicion.y, tamaño, tamaño);
+    //fill(255);
+    //image(img,posicion.x,posicion.y,tamaño,tamaño);
+    //ellipse(posicion.x, posicion.y, tamaño, tamaño);
+    if (img != null) {
+      image(img, posicion.x, posicion.y, tamaño, tamaño);
+      //println("carga img");
+    } else {
+      
+      fill(255);
+      rect(posicion.x, posicion.y, tamaño, tamaño);
+    }
   }
   
   public boolean fueraDePantalla() {
     return (posicion.x < 0||posicion.x > width|| posicion.y < 0 || posicion.y > height); 
   }
   
-  
+   public PVector getPosicion() {
+        return posicion;
+    }
+
 }

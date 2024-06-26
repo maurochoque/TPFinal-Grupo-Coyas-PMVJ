@@ -3,10 +3,11 @@ class Enemigo {
   private PVector velocidad;
   private PVector velocidadOriginal; // guarda la velocidad original
   private int tamaño;
-  private ArrayList<Disparo> disparos;
+  private ArrayList<Disparo> disparos;//cambiar por spawnerBalas
   private int intervaloDisparo;
   private int tiempoUDisparo;
   
+  PImage img;
   public Enemigo(PVector posicion, PVector velocidad, int tamaño, int intervaloDisparo) {
     this.posicion = posicion.copy();
     this.velocidad = velocidad.copy();
@@ -15,6 +16,7 @@ class Enemigo {
     this.intervaloDisparo = intervaloDisparo;
     this.tiempoUDisparo = 0;
     this.disparos = new ArrayList<Disparo>();
+    img= loadImage("Img/disparoEnemy.png");
   }
   
   public void actualizar() {
@@ -33,7 +35,7 @@ class Enemigo {
     if (millis() - tiempoUDisparo >= intervaloDisparo) {
       PVector posicionBala = posicion.copy();
       PVector velocidadBala = new PVector(0, 3);  
-      disparos.add(new Disparo(posicionBala, velocidadBala, 5));
+      disparos.add(new Disparo(posicionBala, velocidadBala, 20,img));/*trabajar con spawnerBalas/Opcional*/
       tiempoUDisparo = millis();
     }
   }
@@ -65,4 +67,5 @@ class Enemigo {
    public void restaurarVelocidad() {
       velocidad.set(velocidadOriginal);
     }
+    
 }
