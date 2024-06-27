@@ -11,6 +11,9 @@ class Player{
   //Enemy e;
   
   PImage img;
+  
+  private int puntaje;
+  private int vida;
   public Player(PVector pos){//, PowerUp powerUp){
     this.posicion=pos;
     //pos = new PVector(width/2,height-25);
@@ -24,8 +27,9 @@ class Player{
     powerUp = new PowerUp(3000); // duracion de congelacion de 3 segundos
     img=loadImage("Img/disparoPlayer.png");
     calculos=new Calculos();
-    
     //SpawnerBalas balasEnemigos=e.getSpawner();
+    puntaje=0;
+    vida=100;
   }
   
   
@@ -36,7 +40,8 @@ class Player{
     spawner.displayDisparos();
     powerUp.displayEscudo(getPos());
     //println(pos.x,pos.y);
-    
+    text(puntaje,50,height-50);
+    text(vida,50,height-100);
   }
   
   public void move() {
@@ -110,8 +115,9 @@ class Player{
    public void colision(ArrayList<Disparo> balasEnemigos) {
       
         if (calculos.cPyD(this, balasEnemigos)) {
-           
-            println("colision");
+              vida-=1;
+             //puntaje+=10;
+            //println("colision");
         }
         else{
           //println("NONO");
@@ -121,8 +127,8 @@ class Player{
       public void colision2(ArrayList<Enemigo> enemigos) {
       
         if (calculos.cPyE(this, enemigos)) {
-           
-            println("colision");
+           vida-=5;
+            //println("colision");
         }
         else{
           //println("NONO");
@@ -136,5 +142,11 @@ class Player{
   }
   public PVector getMovi(){
     return movimiento;
+  }
+  public SpawnerBalas getSpawner(){
+    return spawner;
+  }
+  public void setPuntaje(int aumento){
+    puntaje+=aumento;
   }
 }

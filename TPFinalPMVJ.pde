@@ -22,7 +22,7 @@ void draw(){
   e.display();
   e.moverCos();
   e.detecP(p);
-  //e.disparar();
+  e.disparar();
   //e.disparoPower();
   spawnerEnemigos.actualizarSpawner();
   spawnerEnemigos.displayEnemigos();
@@ -31,7 +31,9 @@ void draw(){
   p.colision(e.getDisparos());
   p.colision(spawnerEnemigos.getSpawner().getDisparos());
   p.colision2(spawnerEnemigos.enemigos);
-  //p.update(spawnerEnemigos.actualizarSpawner());
+  //p.colision(spawnerEnemigos.actualizarSpawner());
+  e.colision(p.getSpawner().getDisparos(),p);
+  spawnerEnemigos.colision(p.getSpawner().getDisparos(),p);
 }
 
 void keyPressed() {

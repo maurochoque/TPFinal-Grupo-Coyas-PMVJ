@@ -64,6 +64,8 @@ class Enemigo {
     }
   }*/
   
+ 
+  
   public boolean fueraDePantalla() {
     return posicion.y > height;
   }

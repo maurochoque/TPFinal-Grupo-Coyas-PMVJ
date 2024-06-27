@@ -38,4 +38,5 @@ class SpawnerBalas {
    public ArrayList<Disparo> getDisparos() {
         return disparos;
     }
+    
 }
