@@ -56,7 +56,7 @@ class Disparo {
      /*CORREGIDO AUMENTE DURACION DE VIDA DE LA BALA*/
      /*REVISAR PORQUE NO REBOTA EN LA PARTE INFERIOR*/
          if (posicion.y <= 0 || posicion.y >= height) {
-            println("chocaa");
+            //println("chocaa");
             PVector normal = new PVector(0, 1);
             velocidad = calculo.reflejar(velocidad, normal);//reflejar(velocidad, normal);  
             }

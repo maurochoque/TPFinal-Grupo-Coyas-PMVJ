@@ -6,6 +6,7 @@ class SpawnerEnemigos {
   private SpawnerBalas spawnerBalas;
   //SpawnerBalas f;
   private float time=Time.getDeltaTime(frameRate);
+  private Calculos cal;
   public SpawnerEnemigos(int intervaloSpawn) {
     enemigos = new ArrayList<Enemigo>();
     this.intervaloSpawn = intervaloSpawn;
@@ -13,6 +14,7 @@ class SpawnerEnemigos {
         this.powerUp = new PowerUp(3000);
         this.spawnerBalas = new SpawnerBalas(); // crea una instancia compartida de SpawnerBalas
         //this.f= this.getSpawner();
+        cal= new Calculos();
   }
 
   public void actualizarSpawner() {
@@ -61,4 +63,28 @@ class SpawnerEnemigos {
   public SpawnerBalas getSpawner(){
     return spawnerBalas;
   }
+  
+    public void colision(ArrayList<Disparo> balasP, Player player) {
+      
+        if (cal.cPDyE2(balasP ,this)) {
+          player.setPuntaje(10);
+           
+           
+        }
+        else{
+          //println("NONO");
+        }
+
+    }
+  
+   /*public ArrayList<PVector> getPosicionesEnemigos() {
+    ArrayList<PVector> posiciones = new ArrayList<PVector>();
+    for (Enemigo enemigo : enemigos) {
+      posiciones.add(enemigo.getPosicion().copy());
+    }
+    return posiciones;
+  }*/
+  public ArrayList<Enemigo> getEnemigos() {
+    return enemigos;
+}
 }

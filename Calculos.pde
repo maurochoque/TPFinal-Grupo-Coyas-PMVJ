@@ -72,7 +72,7 @@ class Calculos{
     //println(cx, cy, cz, area);
     return new PVector(cx, cy, cz);
   }
-  
+  /*PONER EN INTERFAZ LOS METODOS SIMILARES*/
  public boolean cPyD(Player player, ArrayList<Disparo> balasEnemigos) {
         PVector posPlayer = player.getPos(); 
         
@@ -83,7 +83,7 @@ class Calculos{
 
             float distancia = posPlayer.dist(posBala); // calcula distancia entre juygador y el disparo
           //println(bala.getPosicion(),posPlayer,distancia);
-          println(distancia);
+          //println(distancia);
             if (distancia < 25) { 
                 colision = true;
                 bala.posicion.y=-100;//elimina la bala al ponerla fuera del size por el metodo de Disparo.fueradePantalla
@@ -123,6 +123,58 @@ class Calculos{
         }
         return colision;
     }
+    
+    public boolean cPDyE(ArrayList<Disparo> disparoP, Enemy enemy) {//, SpawnerEnemigos spawnerEnemigos
+    boolean colision = false;
+
+    
+    PVector posEnemy = enemy.getPosicion();
+    for (Disparo bala : disparoP) {
+        PVector posBala = bala.getPosicion(); //bala.getPosicion().copy(); 
+        float distancia = posEnemy.dist(posBala); 
+        if (distancia < 25) {
+            colision = true;
+            posEnemy.y=-100;
+            
+           //break;
+        }
+    }
+
+    
+    
+
+    return colision;
+}
+
+
+
+public boolean cPDyE2(ArrayList<Disparo> disparoP, SpawnerEnemigos spawner) {//, SpawnerEnemigos spawnerEnemigos
+    boolean colision = false;
+
+    
+    ArrayList<Enemigo> enemigos = spawnerEnemigos.getEnemigos();
+    for (Enemigo enemigo : enemigos) {
+        PVector posEnemigo = enemigo.getPosicion();
+        for (Disparo bala : disparoP) {
+            PVector posBala = bala.getPosicion().copy();
+            float distancia = posEnemigo.dist(posBala); 
+            //println(distancia);
+            if (distancia < 30) {
+                colision = true;
+                posEnemigo.y=-100;
+                bala.getPosicion().y=-100;
+                println(distancia);
+                //enemigo.posicion.y=-500;
+                //break; 
+            }
+        }
+        if (colision) {
+            //break; 
+        }
+    }
+
+    return colision;
+}
   
  
 }

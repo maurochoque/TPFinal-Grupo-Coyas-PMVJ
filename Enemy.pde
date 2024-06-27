@@ -124,11 +124,17 @@ class Enemy{
       //println("se crea");
     }
   }
-    /*public void disparar() {
-    PVector posicionBala = posicion.copy();//copy() es una copia de posicion original, si se cambia posicion en algun momento esta posicion con copy(), no se ve afectada
-    PVector velocidadBala = new PVector(0, 3);  // Velocidad de la bala
-    spawner.agregarDisparo(posicionBala, velocidadBala, 5);/*MODIFICAR VelocidadBala POR VARIABLE//
-  }*/
+    public void colision(ArrayList<Disparo> balasP, Player player) {
+      
+        if (cal.cPDyE(balasP ,this)) {
+             player.setPuntaje(1000);
+            //println("colision");
+        }
+        else{
+          //println("NONO");
+        }
+
+    }
   
   public PVector getPosicion(){
     return this.posicion;

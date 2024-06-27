@@ -65,7 +65,7 @@ class PowerUp {
   public void displayEscudo(PVector posicionPlayer) {
     if (escudoActivo) {
       
-      stroke(0, 0, 255);
+      stroke(50, 255, 0);
       noFill();
       //translate(posicionPlayer.x,posicionPlayer.y);
       PVector referencia = new PVector(1,1); //referencia para clacular el escudo
@@ -79,9 +79,9 @@ class PowerUp {
         float factorEscala = radioFijo / area;
         PVector puntoEscalado = pp.mult(factorEscala);
         
-        circle(posicionPlayer.x, posicionPlayer.y, puntoEscalado.mag());
+        circle(posicionPlayer.x+12, posicionPlayer.y+12, puntoEscalado.mag());
            // circle(posicionPlayer.x,posicionPlayer.y,area);
-       println(area, referencia);
+       //println(area, referencia);
     
     } else {
       strokeWeight(1);
