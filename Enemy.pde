@@ -35,6 +35,7 @@ class Enemy{
     //image(sprite,this.posicion.x,this.posicion.y);
     
   }
+ 
     public void actualizarDisparos() {
         spawner.actualizarDisparos();
     }
@@ -53,11 +54,12 @@ class Enemy{
     float angulo=cal.calcularAngulo(pV,dist);
     //println(angulo);
     
-   if(dist.y <= 230){ //(dist.x>5 && dist.y<230){
-     power=5;//player al acercarse aumenta movimiento de enemy
+   if(dist.y <= 600){ //(dist.x>5 && dist.y<230){
+     power=15;//player al acercarse aumenta movimiento de enemy
      stroke(255,11,0);
      line(this.posicion.x,this.posicion.y,player.getPos().x,player.getPos().y);
     //println(dist);
+    
     }
     else{
       power=1;
@@ -138,6 +140,9 @@ class Enemy{
   
   public PVector getPosicion(){
     return this.posicion;
+  }
+  public void setPosicion(PVector pos){
+    posicion=pos;
   }
   
   public SpawnerBalas getSpawner(){

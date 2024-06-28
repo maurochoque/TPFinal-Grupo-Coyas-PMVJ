@@ -149,4 +149,7 @@ class Player{
   public void setPuntaje(int aumento){
     puntaje+=aumento;
   }
+  public int getPuntaje(){
+    return puntaje;
+  }
 }
