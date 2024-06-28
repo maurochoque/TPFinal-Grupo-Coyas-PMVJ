@@ -134,7 +134,7 @@ class Calculos{
         float distancia = posEnemy.dist(posBala); 
         if (distancia < 25) {
             colision = true;
-            posEnemy.y=-100;
+            //posEnemy.y=-100;
             
            //break;
         }
@@ -163,7 +163,7 @@ public boolean cPDyE2(ArrayList<Disparo> disparoP, SpawnerEnemigos spawner) {//,
                 colision = true;
                 posEnemigo.y=-100;
                 bala.getPosicion().y=-100;
-                println(distancia);
+                //println(distancia);
                 //enemigo.posicion.y=-500;
                 //break; 
             }
