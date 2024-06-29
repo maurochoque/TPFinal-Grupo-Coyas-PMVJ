@@ -10,6 +10,11 @@ class Enemigo {
   private float time=Time.getDeltaTime(frameRate);
   
   PImage img;
+  PImage img2;
+  PImage img3;
+  PImage [] imgsE;
+  float e2;
+  float e3;
   public Enemigo(PVector posicion, PVector velocidad, int tamaño, int intervaloDisparo, SpawnerBalas spawnerBalas) {
     this.posicion = posicion.copy();
     this.velocidad = velocidad.copy();
@@ -21,6 +26,12 @@ class Enemigo {
     //this.spawnerBalas = new SpawnerBalas();/**/
     //this.disparos = new ArrayList<Disparo>();
     img= loadImage("Img/disparoEnemy.png");
+    img2= loadImage("Img/AlienAzulSprite.png");
+    img3= loadImage("Img/AlienRosaSprite.png");
+    //imgsE= new PImage[2];
+    //imgsE[0]= img2;
+    //imgsE[1]= img3;
+    
   }
   
   public void actualizar() {
@@ -31,8 +42,14 @@ class Enemigo {
   }
   
   public void display() {
-    fill(255, 0, 0);
-    ellipse(posicion.x, posicion.y, tamaño, tamaño);
+    //int indiceAleatorio = int(random(0, imgsE.length));
+    //PImage imgAleatoria = imgsE[indiceAleatorio];
+    img3.resize(25,25);
+    image(img3,posicion.x-12,posicion.y-12);
+    //fill(255, 0, 0);
+    //noFill();
+    //ellipse(posicion.x, posicion.y, tamaño, tamaño);
+    
     spawnerBalas.displayDisparos();/**/
     //displayDisparos();
   }
@@ -70,7 +87,7 @@ class Enemigo {
     return posicion.y > height;
   }
   public boolean fueraDePantallaW() {
-    return posicion.y > width;
+    return posicion.x > width;
   }
   
        // metodo para restaurar la velocidad original
