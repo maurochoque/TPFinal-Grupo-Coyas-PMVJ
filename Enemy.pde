@@ -13,7 +13,7 @@ class Enemy{
   private SpawnerBalas spawner;
   
   PImage img;
-  
+  PImage imgE;
   PImage imgPW;
   //float time=Time.getDeltaTime(frameRate);//
   public Enemy(PVector posicion){
@@ -23,17 +23,20 @@ class Enemy{
     spawner = new SpawnerBalas();
     img= loadImage("Img/disparoEnemy.png");
     imgPW = loadImage("Img/disparoEnemyPW.png");
+    imgE = loadImage("Img/Enemy.png");
   }
   
   public void display(){
-    fill(255);
-    circle(this.posicion.x,this.posicion.y,25);
+    imgE.resize(100,100);
+    //circle(this.posicion.x,this.posicion.y,50);/*PARA CONTROLAR LA COLISION*/
+    image(imgE,this.posicion.x-50,this.posicion.y-60);
+    //fill(255);
+    
     spawner.displayDisparos();
-
+    
     //PImage sprite = imagen.get(425,340,90,20);
     //sprite.resize(180,40);
-    //image(sprite,this.posicion.x,this.posicion.y);
-    
+    //image(sprite,this.posicion.x,this.posicion.y); 
   }
  
     public void actualizarDisparos() {
@@ -127,7 +130,7 @@ class Enemy{
     }
   }
     public void colision(ArrayList<Disparo> balasP, Player player) {
-      
+      /*******Modificar NO POR PUNTAJE PASE AL OTRO MIVEL***********/
         if (cal.cPDyE(balasP ,this)) {
              player.setPuntaje(1000);
             //println("colision");
