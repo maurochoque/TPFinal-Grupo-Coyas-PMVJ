@@ -37,6 +37,7 @@ class Calculos{
    cose=-cose;
    pos.y=pos.y+(cose*po);
   } 
+  
    /*Resta Vectores*/
    PVector distancia(PVector enemy, PVector player) {
     PVector distancia = PVector.sub(player, enemy);
@@ -76,7 +77,7 @@ class Calculos{
  public boolean cPyD(Player player, ArrayList<Disparo> balasEnemigos) {
         PVector posPlayer = player.getPos(); 
         
-        boolean colision = false;
+         boolean colision = false;
 
         for (Disparo bala : balasEnemigos) {
             PVector posBala = bala.getPosicion().copy();//posicion actual del disparo
@@ -175,6 +176,6 @@ public boolean cPDyE2(ArrayList<Disparo> disparoP, SpawnerEnemigos spawner) {//,
 
     return colision;
 }
-  
+
  
 }

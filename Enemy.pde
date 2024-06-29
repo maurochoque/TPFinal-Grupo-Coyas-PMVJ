@@ -8,7 +8,7 @@ class Enemy{
   private float intervaloDisparo = 1000; 
   
   private float tiempoUltimoDisparoPower = 0;
-  private float intervaloDisparoPower = 4000; // dispara cada 10 segundos
+  private float intervaloDisparoPower = 2000; // dispara cada 10 segundos
   
   private SpawnerBalas spawner;
   
@@ -68,9 +68,15 @@ class Enemy{
       power=1;
       stroke(0);
     }
-    /*******COMBINAR CON LA BALA POWERUP***********/
+    
     if(angulo > 110 || angulo < 70){
+      fill(255,0,0,50);
+      circle(this.posicion.x,this.posicion.y,80);
       line(this.posicion.x,this.posicion.y,player.getPos().x,player.getPos().y);
+      intervaloDisparoPower=500;
+    }
+    else{
+      intervaloDisparoPower=2000;
     }
     
   }
@@ -119,7 +125,7 @@ class Enemy{
      // disparar bala grande cada 4 segundos
     if (tiempoT - tiempoUltimoDisparoPower >= intervaloDisparoPower) {
       PVector posicionBalaP = posicion.copy();
-      PVector velocidadBalaP = new PVector(random(-5, 5), random(0,3));//"direccion" hacia donde saldra la bala grande
+      PVector velocidadBalaP = new PVector(random(-5, 5), random(0,10));//"direccion" hacia donde saldra la bala grande
       Disparo disparo = new Disparo(posicionBalaP, velocidadBalaP, 30,imgPW);
       disparo.reflectante = true;
       disparo.tiempoReflexion = millis();

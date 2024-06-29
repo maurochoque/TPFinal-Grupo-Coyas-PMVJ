@@ -11,7 +11,7 @@ class Player{
   //Enemy e;
   
   PImage img;
-  
+  PImage imgPlayer;
   private int puntaje;
   private int vida;
   public Player(PVector pos){//, PowerUp powerUp){
@@ -26,21 +26,27 @@ class Player{
     spawner = new SpawnerBalas();
     powerUp = new PowerUp(3000); // duracion de congelacion de 3 segundos
     img=loadImage("Img/disparoPlayer.png");
+    imgPlayer= loadImage("Img/NaveSprite.png");
     calculos=new Calculos();
     //SpawnerBalas balasEnemigos=e.getSpawner();
     puntaje=0;
-    vida=100;
+    vida=10;
   }
   
   
   public void display(){
-    fill(0,200,50);
-    square(posicion.x+movimiento.x,posicion.y+movimiento.y,25);
+    imgPlayer.resize(25,25);
+    image(imgPlayer,posicion.x+movimiento.x,posicion.y+movimiento.y);
+    //fill(0,200,50);
+    //noFill();
+    //square(posicion.x+movimiento.x,posicion.y+movimiento.y,25);
     
     spawner.displayDisparos();
     powerUp.displayEscudo(getPos());
     //println(pos.x,pos.y);
-    text(puntaje,50,height-50);
+    //text(puntaje,50,height-50);//muestra puntaje en pantalla
+    textSize(20);
+    fill(0,220,0);
     text(vida,50,height-100);
   }
   
@@ -113,13 +119,19 @@ class Player{
   }
   
    public void colision(ArrayList<Disparo> balasEnemigos) {
-      
+           /* if(powerUp.escudoActivo==true){
+          vida-=0;
+        }*/
         if (calculos.cPyD(this, balasEnemigos)) {
-              vida-=1;
+          if(powerUp.escudoActivo){
+          vida-=0;
+        } 
              //puntaje+=10;
             //println("colision");
-        }
         else{
+          vida-=1;
+        }
+        
           //println("NONO");
         }
 
@@ -127,12 +139,17 @@ class Player{
       public void colision2(ArrayList<Enemigo> enemigos) {
       
         if (calculos.cPyE(this, enemigos)) {
+           if(powerUp.escudoActivo){
+          vida-=0;
+        } 
+         else{
            vida-=5;
-            //println("colision");
-        }
-        else{
           //println("NONO");
         }
+          
+            //println("colision");
+        }
+       
 
     }
   
@@ -151,5 +168,8 @@ class Player{
   }
   public int getPuntaje(){
     return puntaje;
+  }
+  public int getVida(){
+    return vida;
   }
 }

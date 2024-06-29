@@ -58,6 +58,7 @@ class PowerUp {
    public void activarEscudo() {
     this.escudoActivo = true;
     this.tiempoInicioEscudo = millis();
+    
   }
       /* public boolean escudoA() {
     return escudoActivo;
