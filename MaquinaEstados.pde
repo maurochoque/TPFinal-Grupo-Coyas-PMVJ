@@ -5,6 +5,7 @@ class MaquinaEstados{
   public static final String JUGAR="Jugar";
   public static final String JUGARNIVEL2="Jugar nivel 2";
   public static final String JUGARNIVEL3="Jugar nivel 3";
+  public static final String INTERMEDIO="Pantalla Carga";
   public static final String PERDER="Perdiste";
   public static final String GANAR="Ganaste";
   

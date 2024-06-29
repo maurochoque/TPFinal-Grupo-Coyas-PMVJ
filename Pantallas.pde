@@ -59,6 +59,12 @@ class Pantallas {
     String miTexto2 = "Presiona ENTER para JUGAR";
     //text(miTexto2, width/2, height/2+80);
   }
+  /*AGREGAR Y PONER LINDO LAS PANTALLAS*/
+  public void dibujarGanar(){
+    background(50,99,15);
+    String s="GANASTE";
+    text(s,width/2,height/2);
+  }
   
   
   /*********METODOS ACCESORES***************/
