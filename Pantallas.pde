@@ -104,7 +104,7 @@ float radio = 120;
      //textSize(24);
     }
     String s="COMPLETASTE LA MISION";
-    text(s,width/2-130,100);
+    text(s,width/2,100);
    p.resize(50,50);
    e3.resize(25,25);
    

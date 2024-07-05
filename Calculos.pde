@@ -39,7 +39,7 @@ class Calculos{
   } 
   
    /*Resta Vectores*/
-   PVector distancia(PVector enemy, PVector player) {
+   public PVector distancia(PVector enemy, PVector player) {
     PVector distancia = PVector.sub(player, enemy);
     //distancia.normalize();
     return distancia;

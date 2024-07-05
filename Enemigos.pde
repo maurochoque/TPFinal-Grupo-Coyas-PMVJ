@@ -12,7 +12,6 @@ class Enemigo {
   PImage img;
   PImage img2;
   PImage img3;
-  PImage [] imgsE;
   float e2;
   float e3;
   public Enemigo(PVector posicion, PVector velocidad, int tamaño, int intervaloDisparo, SpawnerBalas spawnerBalas) {

@@ -6,7 +6,7 @@ SpawnerEnemigos spawnerEnemigos;
 PImage fondo;
 boolean banderaI;
 //PowerUp powerUp;
-private String pantallaInicio;
+String pantallaInicio;
 int rTiempo;
 boolean colisionActiva;
 
@@ -44,7 +44,7 @@ void draw(){
           {
             
             inicio.dibujar();
-            //estadoPerder();
+            //estadoGanar();
             musicaI.play();
             
             break;
