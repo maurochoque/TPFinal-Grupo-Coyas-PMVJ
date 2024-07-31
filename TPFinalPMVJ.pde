@@ -21,6 +21,7 @@ void setup(){
   minim = new Minim(this);
   inicio=new Pantallas();
     //powerUp = new PowerUp(3000); 
+    
   fondo = loadImage("Img/fondoG2.png");
   //p= new Player(new PVector (width/2,height-25)); //powerUp);
   //e= new Enemy(new PVector(width/2,30));
@@ -38,7 +39,8 @@ void setup(){
 }
 
 void draw(){
-  
+  background(0);
+  //println(frameRate);
   switch(pantallaInicio) {//CONDICIONAL MULTIPLE, DEPENDE A LA MAQUINA DE ESTADO SE DIBUJA
         case MaquinaEstados.INICIO://CASO EN QUE "MaquinaEstados.INICIO:" SEA TRUE
           {
@@ -133,7 +135,7 @@ void destruirObjetos() {
 }
 
 void inicializarEstadoJugar(){
-  p = new Player(new PVector(width / 2, height - 25));
+  p = new Player(new PVector(width / 2, height - 65));
   spawnerEnemigos = new SpawnerEnemigos(int(random(500, 1500)));
 }
 void inicializarEstadoJugarNivel2() {
@@ -142,7 +144,8 @@ void inicializarEstadoJugarNivel2() {
 }
 
 void estadoJugar() {
-  image(fondo, 0, 0, width, height); 
+  //println(p.getPos().x,p.getMovi().x);
+  image(fondo, 0, 0, width, height-25); 
   p.display();
   p.move();
   Bordes.calcuBordes(p.getMovi(), 500, 500);
@@ -152,7 +155,8 @@ void estadoJugar() {
   p.colision(spawnerEnemigos.getSpawner().getDisparos());
   p.colision2(spawnerEnemigos.enemigos);
   spawnerEnemigos.colision(p.getSpawner().getDisparos(), p);
-
+  String nivel="Nivel 1";
+  text(nivel,width/2,height-10);
   if (p.getPuntaje() >= 150) {
     pantallaInicio = MaquinaEstados.JUGARNIVEL2;
     //inicializarEstadoJugarNivel2();
@@ -163,7 +167,9 @@ void estadoJugar() {
 }
 
 void estadoJugarNivel2() {
-  image(fondo, 0, 0, width, height); 
+  image(fondo, 0, 0, width, height-25); 
+  String nivel="Nivel 2";
+  text(nivel,width/2,height-10);
   p.display();
   p.move();
   Bordes.calcuBordes(p.getMovi(), 500, 500);
@@ -174,8 +180,9 @@ void estadoJugarNivel2() {
   //e.colision(p.getSpawner().getDisparos(), p);
   p.colision(e.getDisparos());
   p.colision(spawnerEnemigos.getSpawner().getDisparos());
+  
   if (millis() - rTiempo > 60000) { // despues de 1 minuto se vuelve tangible
-    colisionActiva = !colisionActiva; 
+    //colisionActiva = !colisionActiva; 
     //rTiempo = millis(); 
     e.colision(p.getSpawner().getDisparos(), p);
     //println("colision");
@@ -188,8 +195,9 @@ void estadoJugarNivel2() {
   }
 }
 void estadoJugarNivel3() {
-  image(fondo, 0, 0, width, height); 
-  
+  image(fondo, 0, 0, width, height-25); 
+  String nivel="Nivel 3";
+  text(nivel,width/2,height-10);
   //background(250);
   p.display();
   p.move();
@@ -207,6 +215,8 @@ void estadoJugarNivel3() {
   p.colision(spawnerEnemigos.getSpawner().getDisparos());
   p.colision2(spawnerEnemigos.enemigos);
   //p.colision(spawnerEnemigos.actualizarSpawner());
+  
+  
   if(p.getPuntaje() >= 2000){//OBJETIVOS DEL JUEGO
   e.colision(p.getSpawner().getDisparos(),p);
   pantallaInicio = MaquinaEstados.GANAR;

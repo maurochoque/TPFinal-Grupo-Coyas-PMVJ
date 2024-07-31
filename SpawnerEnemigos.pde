@@ -77,13 +77,7 @@ class SpawnerEnemigos {
 
     }
   
-   /*public ArrayList<PVector> getPosicionesEnemigos() {
-    ArrayList<PVector> posiciones = new ArrayList<PVector>();
-    for (Enemigo enemigo : enemigos) {
-      posiciones.add(enemigo.getPosicion().copy());
-    }
-    return posiciones;
-  }*/
+   
   public ArrayList<Enemigo> getEnemigos() {
     return enemigos;
 }

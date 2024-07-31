@@ -5,11 +5,11 @@ class Player{
   private boolean mU, mD, mL, mR;
   private float deltaTime = Time.getDeltaTime(frameRate);
   private SpawnerBalas spawner;
-  
+  private int tamaño;
   private PowerUp powerUp;
   Calculos calculos;
   //Enemy e;
-  
+  PImage spriteVida;
   PImage img;
   PImage imgPlayer;
   private int puntaje;
@@ -25,8 +25,10 @@ class Player{
     mR = false;
     spawner = new SpawnerBalas();
     powerUp = new PowerUp(3000); // duracion de congelacion de 3 segundos
+    tamaño=25;
     img=loadImage("Img/disparoPlayer.png");
     imgPlayer= loadImage("Img/NaveSprite.png");
+    spriteVida= loadImage("Img/vida.png");
     calculos=new Calculos();
     //SpawnerBalas balasEnemigos=e.getSpawner();
     puntaje=0;
@@ -35,7 +37,7 @@ class Player{
   
   
   public void display(){
-    imgPlayer.resize(25,25);
+    imgPlayer.resize(tamaño,tamaño);
     image(imgPlayer,posicion.x+movimiento.x,posicion.y+movimiento.y);
     //fill(0,200,50);
     //noFill();
@@ -44,10 +46,15 @@ class Player{
     spawner.displayDisparos();
     powerUp.displayEscudo(getPos());
     //println(pos.x,pos.y);
-    //text(puntaje,50,height-50);//muestra puntaje en pantalla
-    textSize(20);
-    fill(0,220,0);
-    text(vida,50,height-100);
+    String puntajeString="Puntaje";
+    textSize(15);
+    fill(209,189,8,150);
+    text(vida,50,height-10);
+    spriteVida.resize(15,15);
+    image(spriteVida,20,height-20);
+    text(puntaje,460,height-10);//muestra puntaje en pantalla
+    textSize(15);
+    text(puntajeString,400,height-10);
   }
   
   public void move() {
@@ -71,12 +78,10 @@ class Player{
    public void disparar() {
     PVector posBala = new PVector(this.posicion.x+movimiento.x,this.posicion.y+movimiento.y-25);//PVector.add(posicion, movimiento);
     PVector velBala = new PVector(0, -10);  // vlocidad de la bala
-   // Disparo disparo= new Disparo(posBala, velBala, 5,f);
-   // spawner.agregarDisparo(disparo);
+   
      
     spawner.agregarDisparo(posBala, velBala, 25,img);/*cambiar 5 por una variable*/
-    //spawner.actualizarDisparos();
-    //println(posBala);
+    
     
   }
   
@@ -119,17 +124,18 @@ class Player{
   }
   
    public void colision(ArrayList<Disparo> balasEnemigos) {
-           /* if(powerUp.escudoActivo==true){
-          vida-=0;
-        }*/
+        
+          
+        //calculos
         if (calculos.cPyD(this, balasEnemigos)) {
           if(powerUp.escudoActivo){
           vida-=0;
         } 
-             //puntaje+=10;
-            //println("colision");
+             
         else{
-          vida-=1;
+          //println("colision",frameRate);
+          setVida(1);
+          //vida-=1;
         }
         
           //println("NONO");
@@ -143,7 +149,8 @@ class Player{
           vida-=0;
         } 
          else{
-           vida-=5;
+           //vida-=5;
+           setVida(5);
           //println("NONO");
         }
           
@@ -171,5 +178,12 @@ class Player{
   }
   public int getVida(){
     return vida;
+  }
+  public void setVida(int resta){
+    vida-=resta;
+  }
+  
+  public int getTamaño(){
+    return tamaño;
   }
 }

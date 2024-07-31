@@ -3,6 +3,7 @@ class Enemigo {
   private PVector velocidad;
   private PVector velocidadOriginal; // guarda la velocidad original
   private int tamaño;
+  private float tamañoB;
   private SpawnerBalas spawnerBalas;  
  // private ArrayList<Disparo> disparos;//cambiar por spawnerBalas
   private int intervaloDisparo;
@@ -19,18 +20,15 @@ class Enemigo {
     this.velocidad = velocidad.copy();
     this.velocidadOriginal = velocidad.copy(); // inicia con la velocidad original, para guardar su valor
     this.tamaño = tamaño;
+    this.tamañoB=20;
     this.intervaloDisparo = intervaloDisparo;
     this.tiempoUDisparo = 0;
     this.spawnerBalas = spawnerBalas; // usa la instancia pasada
-    //this.spawnerBalas = new SpawnerBalas();/**/
-    //this.disparos = new ArrayList<Disparo>();
+    
     img= loadImage("Img/disparoEnemy.png");
     img2= loadImage("Img/AlienAzulSprite.png");
     img3= loadImage("Img/AlienRosaSprite.png");
-    //imgsE= new PImage[2];
-    //imgsE[0]= img2;
-    //imgsE[1]= img3;
-    
+   
   }
   
   public void actualizar() {
@@ -41,49 +39,29 @@ class Enemigo {
   }
   
   public void display() {
-    //int indiceAleatorio = int(random(0, imgsE.length));
-    //PImage imgAleatoria = imgsE[indiceAleatorio];
-    img3.resize(25,25);
+    
+    img3.resize(tamaño,tamaño);
     image(img3,posicion.x-12,posicion.y-12);
-    //fill(255, 0, 0);
-    //noFill();
-    //ellipse(posicion.x, posicion.y, tamaño, tamaño);
     
     spawnerBalas.displayDisparos();/**/
-    //displayDisparos();
+    
   }
-  
+
   public void disparar() {
     float vel= 20*time;//improvisado mov en y * deltaTime
     if (millis() - tiempoUDisparo >= intervaloDisparo) {
-      PVector posicionBala = posicion.copy();
+      PVector posicionBala = posicion;//posicion.copy();
       PVector velocidadBala = new PVector(0,vel);
-      spawnerBalas.agregarDisparo(posicionBala, velocidadBala, 20, img);/**/
+      spawnerBalas.agregarDisparo(posicionBala, velocidadBala, tamañoB, img);/**/
       //disparos.add(new Disparo(posicionBala, velocidadBala, 20,img));/*trabajar con spawnerBalas/Opcional*/
       tiempoUDisparo = millis();
     }
   }
   
-  /*public void actualizarDisparos() {
-    for (int i = disparos.size() - 1; i >= 0; i--) {
-      Disparo disparo = disparos.get(i);
-      disparo.actualizar();
-      if (disparo.fueraDePantalla()) {
-        disparos.remove(i);
-      }
-    }
-  }*/
-  
-  /*public void displayDisparos() {
-    for (Disparo disparo : disparos) {
-      disparo.display();
-    }
-  }*/
-  
- 
+
   
   public boolean fueraDePantalla() {
-    return posicion.y > height;
+    return posicion.y > height-40;
   }
   public boolean fueraDePantallaW() {
     return posicion.x > width;
@@ -93,15 +71,27 @@ class Enemigo {
    public void restaurarVelocidad() {
       velocidad.set(velocidadOriginal);
     }
-    /*public ArrayList<Disparo> getDisparos() {
-    return spawnerBalas.getDisparos();
-  }*/
-  
-  /*public SpawnerBalas getSpawner(){
-    return spawnerBalas;
-  }*/
+   
   public PVector getPosicion(){
     return posicion;
   }
-    
+  public PImage getImg2(){
+    return img2;
+  }
+  public void setImg2(PImage imgN){
+    img2=imgN;
+  }
+  
+  public PImage getImg3(){
+    return img3;
+  }
+  public void setImg3(PImage imgN){
+    img3=imgN;
+  }
+  public int getTamaño(){
+    return tamaño;
+  }
+  public float getTamañoB(){
+    return tamañoB;
+  }
 }

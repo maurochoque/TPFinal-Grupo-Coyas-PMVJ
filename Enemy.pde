@@ -34,9 +34,7 @@ class Enemy{
     
     spawner.displayDisparos();
     
-    //PImage sprite = imagen.get(425,340,90,20);
-    //sprite.resize(180,40);
-    //image(sprite,this.posicion.x,this.posicion.y); 
+    
   }
  
     public void actualizarDisparos() {

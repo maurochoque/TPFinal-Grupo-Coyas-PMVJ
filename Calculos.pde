@@ -75,53 +75,70 @@ class Calculos{
   }
   /*PONER EN INTERFAZ LOS METODOS SIMILARES*/
  public boolean cPyD(Player player, ArrayList<Disparo> balasEnemigos) {
-        PVector posPlayer = player.getPos(); 
-        
+        ArrayList<Disparo> sortedBalas = new ArrayList<Disparo>(balasEnemigos);
+        //sortedBalas.sort((a1, a2) -> Float.compare(a1.getPosicion().x, player.getPos().x));
+        sortedBalas.sort((a1, a2) -> Float.compare(a1.getPosicion().x, a2.getPosicion().x));
+        PVector posPlayer= player.getPos(); 
+        int tamañoPlayer= player.getTamaño();
+        /********CODIGO SIMILAR A TODAS LAS COLISIONES*************/
          boolean colision = false;
-
-        for (Disparo bala : balasEnemigos) {
-            PVector posBala = bala.getPosicion().copy();//posicion actual del disparo
-
-            float distancia = posPlayer.dist(posBala); // calcula distancia entre juygador y el disparo
-          //println(bala.getPosicion(),posPlayer,distancia);
-          //println(distancia);
-            if (distancia < 25) { 
-                colision = true;
-                bala.posicion.y=-100;//elimina la bala al ponerla fuera del size por el metodo de Disparo.fueradePantalla
-                //println(posBala.y);
-                //println("150550"); 
-              }
-                else{
-                  //println("SSSS");
-                }
-                //break; // para salir del bucle
-        }
+           for (int i = 0; i < sortedBalas.size(); i++) {
+              Disparo a = sortedBalas.get(i);
+            for (int j = i + 1; j < sortedBalas.size(); j++) {
+             Disparo b = sortedBalas.get(j); 
+      
+             if (player.getPos().x > a.getPosicion().x + a.getTamaño())break; // No puede haber colisión más allá de esto //b.getPosicion().x
+        
+                // Verificación precisa
+            if (dist(a.getPosicion().x, a.getPosicion().y, posPlayer.x, posPlayer.y ) < (a.getTamaño()  / 2 + tamañoPlayer / 2)) {//b.getPosicion().x, b.getPosicion().y //b.getTamaño()
+               //println(a.posicion.y,a,frameRate);
+               colision = true;
+               sortedBalas.remove(a);
+               a.posicion.y=-50;//elimina la bala al posicionarla fuera de pantalla
+                
+            }
+          else{
+            //println("NO");
+       
+      }
+    }
+  }
+      
         return colision;
     }
     
+    
+    
     public boolean cPyE(Player player, ArrayList<Enemigo> enemigos) {
-        PVector posPlayer = player.getPos(); 
+      ArrayList<Enemigo> sortedEnemigos = new ArrayList<Enemigo>(enemigos);
+        //sortedBalas.sort((a1, a2) -> Float.compare(a1.getPosicion().x, player.getPos().x));
+        sortedEnemigos.sort((a1, a2) -> Float.compare(a1.getPosicion().x, a2.getPosicion().x));
+        PVector posPlayer= player.getPos(); 
+        int tamañoPlayer= player.getTamaño();
+        /********CODIGO SIMILAR A TODAS LAS COLISIONES*************/
+         boolean colision = false;
+           for (int i = 0; i < sortedEnemigos.size(); i++) {
+              Enemigo a = sortedEnemigos.get(i);
+            for (int j = i + 1; j < sortedEnemigos.size(); j++) {
+             Enemigo b = sortedEnemigos.get(j); 
+      
+             if (player.getPos().x > a.getPosicion().x + a.getTamaño())break; // No puede haber colisión más allá de esto //b.getPosicion().x
         
-        boolean colision = false;
-
-        for (Enemigo enemigo : enemigos) {
-            PVector posEnemigo = enemigo.getPosicion().copy();//posicion actual del disparo
-
-            float distancia = posPlayer.dist(posEnemigo); // calcula distancia entre juygador y el disparo
-          //println(bala.getPosicion(),posPlayer,distancia);
-          //println(distancia);
-            if (distancia < 25) { 
-                colision = true;
-                enemigo.posicion.y=-100;
-                //bala.posicion.y=-100;//elimina la bala al ponerla fuera del size por el metodo de Disparo.fueradePantalla
-                //println(posBala.y);
-                //println("150550"); 
-              }
-                else{
-                  //println("SSSS");
-                }
-                //break; // para salir del bucle
-        }
+                // Verificación precisa
+            if (dist(a.getPosicion().x, a.getPosicion().y, posPlayer.x, posPlayer.y ) < (a.getTamaño()  / 2 + tamañoPlayer / 2)) {//b.getPosicion().x, b.getPosicion().y //b.getTamaño()
+               //println(a.posicion.y,a,frameRate);
+               colision = true;
+               sortedEnemigos.remove(a);
+               a.posicion.y=-50;//elimina la bala al posicionarla fuera de pantalla
+               //println(a.posicion);
+            }
+          else{
+            //println("NO");
+       
+      }
+    }
+  }
+   
         return colision;
     }
     
@@ -131,8 +148,8 @@ class Calculos{
     
     PVector posEnemy = enemy.getPosicion();
     for (Disparo bala : disparoP) {
-        PVector posBala = bala.getPosicion(); //bala.getPosicion().copy(); 
-        float distancia = posEnemy.dist(posBala); 
+        PVector posBala = bala.getPosicion().copy();//bala.getPosicion();
+        float distancia = posEnemy.dist(posBala);
         if (distancia < 25) {
             colision = true;
             //posEnemy.y=-100;
@@ -150,32 +167,44 @@ class Calculos{
 
 
 public boolean cPDyE2(ArrayList<Disparo> disparoP, SpawnerEnemigos spawner) {//, SpawnerEnemigos spawnerEnemigos
-    boolean colision = false;
-
+      
     
-    ArrayList<Enemigo> enemigos = spawnerEnemigos.getEnemigos();
-    for (Enemigo enemigo : enemigos) {
-        PVector posEnemigo = enemigo.getPosicion();
-        for (Disparo bala : disparoP) {
-            PVector posBala = bala.getPosicion().copy();
-            float distancia = posEnemigo.dist(posBala); 
-            //println(distancia);
-            if (distancia < 30) {
-                colision = true;
-                posEnemigo.y=-100;
-                bala.getPosicion().y=-100;
-                //println(distancia);
-                //enemigo.posicion.y=-500;
-                //break; 
-            }
+      /************FUNCIONA similar al codigo anterior, pero con sweep and prune****************/
+      ArrayList<Disparo> sortedDisparos = new ArrayList<Disparo>(disparoP);
+    ArrayList<Enemigo> sortedEnemigos = new ArrayList<Enemigo>(spawner.getEnemigos());
+
+    sortedDisparos.sort((a1, a2) -> Float.compare(a1.getPosicion().x, a2.getPosicion().x));
+    sortedEnemigos.sort((b1, b2) -> Float.compare(b1.getPosicion().x, b2.getPosicion().x));
+
+    boolean colision = false;
+    int j = 0;
+
+    for (int i = 0; i < sortedEnemigos.size(); i++) {
+        Enemigo enemigo = sortedEnemigos.get(i);
+        /**Primer filtro**/
+        while (j < sortedDisparos.size() && sortedDisparos.get(j).getPosicion().x < enemigo.getPosicion().x - enemigo.getTamaño()) {// enemigo.getTamaño()/2
+            j++;
         }
-        if (colision) {
-            //break; 
+        
+        for (int k = j; k < sortedDisparos.size(); k++) {
+            Disparo disparo = sortedDisparos.get(k);
+        /*Segundo filtro*/
+            if (disparo.getPosicion().x > enemigo.getPosicion().x + enemigo.getTamaño()) {
+                break;
+            }
+        /**Colision precisa**/
+            if (dist(enemigo.getPosicion().x, enemigo.getPosicion().y, disparo.getPosicion().x, disparo.getPosicion().y) < (enemigo.getTamaño() / 2 + disparo.getTamaño() / 2)) {
+                colision = true;
+                //sortedEnemigos.remove(i);
+                enemigo.getPosicion().y = -100;
+                disparo.getPosicion().y = -100;
+            }
         }
     }
 
     return colision;
 }
+  
 
  
 }
