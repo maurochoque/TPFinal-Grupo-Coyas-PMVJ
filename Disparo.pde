@@ -42,7 +42,7 @@ class Disparo {
        if(reflectante) {
         verificarBordes();
        }
-    
+    //println(millis());
     posicion.add(velocidad);
   }
   
@@ -50,27 +50,20 @@ class Disparo {
         if (posicion.x <= 5 || posicion.x >= width-25) {
           PVector normal = new PVector(1, 0);
           velocidad = calculo.reflejar(velocidad, normal);//velocidad = reflejar(velocidad, normal);
+          
       }
               
-     /********REVISAR PORQUE NO REBOTA EN LA PARTE BAJA (MAS CERCANA AL PLAYER)*******/
-     /*CORREGIDO AUMENTE DURACION DE VIDA DE LA BALA*/
-     /*REVISAR PORQUE NO REBOTA EN LA PARTE INFERIOR*/
-         if (posicion.y <= 0 || posicion.y >= height) {
+    
+         if (posicion.y <= 5 || posicion.y >= height-50) {
             //println("chocaa");
             PVector normal = new PVector(0, 1);
             velocidad = calculo.reflejar(velocidad, normal);//reflejar(velocidad, normal);  
             }
           }
-       /*******REFLEXION ******/
-       /*PVector reflejar(PVector direccion, PVector normal) {
-           normal.normalize();
-           return PVector.sub(direccion, PVector.mult(normal, 2 * direccion.dot(normal)));
-         }*/
+     
   
   public void display() {
-    //fill(255);
-    //image(img,posicion.x,posicion.y,tamaño,tamaño);
-    //ellipse(posicion.x, posicion.y, tamaño, tamaño);
+    
     if (img != null) {
       image(img, posicion.x, posicion.y, tamaño, tamaño);
       //println("carga img");
@@ -82,11 +75,14 @@ class Disparo {
   }
   
   public boolean fueraDePantalla() {
-    return (posicion.x < 0||posicion.x > width|| posicion.y < 0 || posicion.y > height); 
+    return (posicion.x < 0||posicion.x > width|| posicion.y < 0 || posicion.y > height-45); 
   }
   
    public PVector getPosicion() {
         return posicion;
+    }
+    public float getTamaño() {
+        return tamaño;
     }
 
 }

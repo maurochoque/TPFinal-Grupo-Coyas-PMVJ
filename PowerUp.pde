@@ -8,6 +8,9 @@ class PowerUp {
   private int tiempoInicioEscudo;
   private Calculos calculo;
       
+      
+      PImage img2;
+  PImage img3;
   public PowerUp(int duracionCongelacion) {
     this.duracionCongelacion = duracionCongelacion;
     this.activo = false;
@@ -15,6 +18,9 @@ class PowerUp {
     this.escudoActivo = false;
     this.duracionEscudo = 3000; 
     this.calculo = new Calculos();
+    
+    img2= loadImage("Img/AlienAzulSprite.png");
+    img3= loadImage("Img/AlienRosaSprite.png");
   }
 
   private void activar() {
@@ -47,11 +53,13 @@ class PowerUp {
   private void congelarEnemigos(ArrayList<Enemigo> enemigos) {
     for (Enemigo enemigo : enemigos) {
       enemigo.velocidad.set(0, 0);//esto convierte la velocidad(movimiento en 0) NO LA POSICION DE CADA ENEMIGO
+      enemigo.setImg3(img2);
     }
   }
   private void restaurarEnemigos(ArrayList<Enemigo> enemigos) {
     for (Enemigo enemigo : enemigos) {
       enemigo.restaurarVelocidad();
+      enemigo.setImg3(img3);
     }
   }
   
@@ -72,30 +80,21 @@ class PowerUp {
       PVector referencia = new PVector(1,1); //referencia para clacular el escudo
       //PVector ref= new PVector(posicionPlayer.x,posicionPlayer.y);
       //float radio = 50; // radio del escudo
-      PVector pp = calculo.productoVectorial(referencia, new PVector(1, 0)); // producto vectorial con vector fijo
+      PVector pc = calculo.productoVectorial(referencia, new PVector(1, 0)); // producto vectorial con vector fijo
       //PVector pp = calculo.productoVectorial(referencia,posicionPlayer);
-      float area = pp.mag();
+      
+      float area = pc.mag();
+      
             // normaliza la magnitud para mantener el area fija
         float radioFijo = 50; // radio fijo del escudo
-        float factorEscala = radioFijo / area;
-        PVector puntoEscalado = pp.mult(factorEscala);
+        float factorEscala = radioFijo * area;//se multiplica el area por un escalar
         
-        circle(posicionPlayer.x+12, posicionPlayer.y+12, puntoEscalado.mag());
-           // circle(posicionPlayer.x,posicionPlayer.y,area);
-       //println(area, referencia);
+        circle(posicionPlayer.x+12, posicionPlayer.y+12, factorEscala);
+      
     
     } else {
       strokeWeight(1);
     }
   }
-     /* public void displayEscudo(PVector posicionPlayer) {
-    if (escudoActivo) {
-      stroke(0, 0, 255);
-      noFill();
-      circle(posicionPlayer.x, posicionPlayer.y, 100); // tamaño del escudo
-    }
-    else{
-      stroke(255);
-    }
-  }*/
+     
 }
